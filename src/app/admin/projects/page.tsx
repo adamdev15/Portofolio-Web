@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import ProjectClient from "./ProjectClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ProjectsPage() {
   const projects = await db.project.findMany({
     orderBy: { createdAt: "desc" },

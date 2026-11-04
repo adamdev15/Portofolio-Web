@@ -9,6 +9,9 @@ import { CertificatesSection } from "@/components/sections/CertificatesSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { GithubContribution } from "@/components/github/github-contribution";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Home() {
   // Fetch all data from database
   const heroData = await db.hero.findFirst();

@@ -22,6 +22,8 @@ export async function PUT(
     });
     
     revalidatePath("/");
+    revalidatePath("/admin/experience");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(experience);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -44,6 +46,8 @@ export async function DELETE(
     });
     
     revalidatePath("/");
+    revalidatePath("/admin/experience");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

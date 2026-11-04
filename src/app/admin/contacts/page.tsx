@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import ContactClient from "./ContactClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ContactsPage() {
   const messages = await db.contactMessage.findMany({
     orderBy: { createdAt: "desc" },

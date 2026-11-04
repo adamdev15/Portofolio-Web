@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import EducationClient from "./EducationClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function EducationAdminPage() {
   const education = await db.education.findMany({
     orderBy: { startDate: "desc" },

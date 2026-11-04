@@ -20,6 +20,8 @@ export async function PUT(
     });
     
     revalidatePath("/");
+    revalidatePath("/admin/skills");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(skill);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -40,6 +42,8 @@ export async function DELETE(
     });
     
     revalidatePath("/");
+    revalidatePath("/admin/skills");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

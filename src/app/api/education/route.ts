@@ -23,6 +23,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const education = await db.education.create({ data: body });
     revalidatePath("/");
+    revalidatePath("/admin/education");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(education);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

@@ -23,6 +23,9 @@ export async function POST(req: Request) {
     const body = await req.json();
     const certificate = await db.certificate.create({ data: body });
     revalidatePath("/");
+    revalidatePath("/certificates");
+    revalidatePath("/admin/certificates");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(certificate);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

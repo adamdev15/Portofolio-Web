@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, FolderGit2, GraduationCap, MessageSquare, Award, Sparkles } from "lucide-react";
 import DashboardCharts from "./DashboardCharts";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function AdminDashboard() {
   const [projectCount, experienceCount, skillCount, messageCount, certificateCount] = await Promise.all([
     db.project.count(),

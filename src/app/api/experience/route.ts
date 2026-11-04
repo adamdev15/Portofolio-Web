@@ -28,6 +28,8 @@ export async function POST(req: Request) {
     });
     
     revalidatePath("/");
+    revalidatePath("/admin/experience");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(experience);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

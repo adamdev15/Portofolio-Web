@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import ExperienceClient from "./ExperienceClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ExperiencePage() {
   const experiences = await db.experience.findMany({
     orderBy: { createdAt: "desc" },

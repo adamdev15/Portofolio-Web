@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import Image from "next/image";
+import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { useLanguage } from "@/context/language-context";
 
 interface FooterProps {
   name?: string;
@@ -9,60 +11,89 @@ interface FooterProps {
 }
 
 export function Footer({ name = "ADAM", image }: FooterProps) {
+  const { t } = useLanguage();
+
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 mt-20 relative overflow-hidden border-t border-white/5">
+    <footer className="bg-card text-foreground py-16 mt-16 relative overflow-hidden border-t border-border/60">
       {/* Decorative glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[150px] pointer-events-none" />
       
       <div className="container px-4 md:px-6 mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="col-span-1 md:col-span-2 space-y-6">
-            
-            <p className="text-blue-100/70 max-w-sm leading-relaxed text-lg">
-              Information Systems student at Harkat State University with experience as a Web Developer. By combining skills in design and development, I strive to create digital solutions that are functional, visually appealing, and user-friendly, ensuring a smooth and engaging user experience.
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="col-span-1 md:col-span-2 space-y-5">
+            <span className="text-2xl font-bold font-heading tracking-tight">
+              Portofolio<span className="text-primary">.</span>
+            </span>
+            <p className="text-muted-foreground max-w-sm leading-relaxed text-sm md:text-base">
+              Information Systems graduate with professional experience in Web Development. Creating high-performance, visually engaging, and scalable digital solutions.
             </p>
-            <div className="flex items-center gap-4 pt-2">
-              <Link href="https://github.com/adamdev15" className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300">
-                <FaGithub size={20} />
-              </Link>
-              <Link href="https://www.linkedin.com/in/adam-8107ba307/" className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300">
-                <FaLinkedin size={20} />
-              </Link>
-              <Link href="https://www.instagram.com/_adam.dev/" className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300">
-                <FaInstagram size={20} />
-              </Link>
-              <Link href="https://wa.me/6285640600585" className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300">
-                <Mail size={20} />
-              </Link>
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://github.com/adamdev15"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 rounded-xl bg-secondary hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="GitHub"
+              >
+                <FaGithub size={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/adam-8107ba307/"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 rounded-xl bg-secondary hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={18} />
+              </a>
+              <a
+                href="https://www.instagram.com/_adam.dev/"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 rounded-xl bg-secondary hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="Instagram"
+              >
+                <FaInstagram size={18} />
+              </a>
+              <a
+                href="https://wa.me/6285640600585"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 rounded-xl bg-secondary hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp size={18} />
+              </a>
             </div>
           </div>
           
           <div>
-            <h4 className="font-bold text-xl mb-6 text-white">Quick Links</h4>
-            <ul className="space-y-4 text-blue-100/60">
-              <li><Link href="#" className="hover:text-primary transition-colors hover:pl-2 transition-all">Home</Link></li>
-              <li><Link href="#experience" className="hover:text-primary transition-colors hover:pl-2 transition-all">Experience</Link></li>
-              <li><Link href="#projects" className="hover:text-primary transition-colors hover:pl-2 transition-all">Projects</Link></li>
-              <li><Link href="#skills" className="hover:text-primary transition-colors hover:pl-2 transition-all">Skills</Link></li>
+            <h4 className="font-bold text-base mb-4 text-foreground">{t("footer.quickLinks")}</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><a href="#home" className="hover:text-primary transition-colors">{t("nav.home")}</a></li>
+              <li><a href="#experience" className="hover:text-primary transition-colors">{t("nav.experience")}</a></li>
+              <li><a href="#projects" className="hover:text-primary transition-colors">{t("nav.projects")}</a></li>
+              <li><a href="#skills" className="hover:text-primary transition-colors">{t("nav.skills")}</a></li>
+              <li><a href="#certificates" className="hover:text-primary transition-colors">{t("nav.certificates")}</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-xl mb-6 text-white">Services</h4>
-            <ul className="space-y-4 text-blue-100/60">
-              <li className="hover:text-primary-foreground/80 cursor-default">Web Development</li>
-              <li className="hover:text-primary-foreground/80 cursor-default">UI/UX Design</li>
-              <li className="hover:text-primary-foreground/80 cursor-default">Mobile Apps</li>
-              <li className="hover:text-primary-foreground/80 cursor-default">SEO Optimization</li>
+            <h4 className="font-bold text-base mb-4 text-foreground">{t("footer.services")}</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="hover:text-primary cursor-default">Web Development</li>
+              <li className="hover:text-primary cursor-default">Backend API & System</li>
+              <li className="hover:text-primary cursor-default">UI/UX Design</li>
+              <li className="hover:text-primary cursor-default">Database Architecture</li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-blue-100/40">
-          <p>© {new Date().getFullYear()} {name} Portfolio. Crafted with Me.</p>
-          <div className="flex gap-8">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:underline hover:text-white transition-colors">Terms of Service</Link>
+        <div className="border-t border-border/40 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} {name}. {t("footer.rights")}</p>
+          <div className="flex gap-6">
+            <span className="hover:text-foreground cursor-pointer transition-colors">{t("footer.privacy")}</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">{t("footer.terms")}</span>
           </div>
         </div>
       </div>

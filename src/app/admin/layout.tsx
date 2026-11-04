@@ -15,6 +15,7 @@ import {
   GraduationCap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -72,10 +73,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header className="h-16 flex items-center px-6 border-b border-border glass-card shrink-0 z-10 relative">
+        <header className="h-16 flex items-center justify-between px-6 border-b border-border glass-card shrink-0 z-10 relative">
           <h2 className="text-lg font-semibold font-heading capitalize text-foreground">
             {pathname.split("/").pop() || "Dashboard"}
           </h2>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+          </div>
         </header>
         <div className="flex-1 overflow-y-auto p-6 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-primary/5 blur-[100px] pointer-events-none rounded-full" />

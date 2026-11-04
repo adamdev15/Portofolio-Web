@@ -26,6 +26,8 @@ export async function POST(req: Request) {
     const project = await db.project.create({ data: body });
     revalidatePath("/");
     revalidatePath("/projects");
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(project);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

@@ -4,10 +4,9 @@ import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
-import Image from "next/image";
 import { SafeImage } from "@/components/ui/safe-image";
 import Typewriter from "typewriter-effect";
-
+import { useLanguage } from "@/context/language-context";
 
 interface HeroProps {
   heroData: {
@@ -20,123 +19,157 @@ interface HeroProps {
 }
 
 export function Hero({ heroData }: HeroProps) {
+  const { t, lang } = useLanguage();
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.45,
         ease: "easeOut",
       },
     },
   };
 
+  const typewriterStrings =
+    lang === "id"
+      ? ["Web Developer", "Backend Developer", "Frontend Developer", "Fullstack Developer"]
+      : ["Web Developer", "Backend Developer", "Frontend Developer", "Fullstack Developer"];
+
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden px-6">
-      {/* Dynamic Background Elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px] pointer-events-none" />
+    <section id="home" className="relative flex items-center pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden px-4 md:px-6">
+      {/* Dynamic Background Glow Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/15 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/15 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="container px-4 md:px-6 relative z-10 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side: Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-8"
+            className="space-y-5 md:space-y-6"
           >
-            <motion.div variants={itemVariants} className="space-y-4">
-              <h2 className="text-xl md:text-2xl font-medium text-primary tracking-wide">
-                Hello, I&apos;m
+            <motion.div variants={itemVariants} className="space-y-2 md:space-y-3">
+              <h2 className="text-lg md:text-xl font-semibold text-primary tracking-wide">
+                {t("hero.greeting")}
               </h2>
-              <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tighter text-foreground leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading tracking-tight text-foreground leading-[1.1]">
                 {heroData.name}
               </h1>
-              <div className="text-2xl md:text-4xl font-semibold text-muted-foreground">
+              <div className="text-xl md:text-3xl font-semibold text-muted-foreground min-h-[40px] flex items-center">
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-primary">
                   <Typewriter
                     options={{
-                      strings: ["Frontend Developer", "Backend Developer", "Web Developer"],
+                      strings: typewriterStrings,
                       autoStart: true,
                       loop: true,
-                      deleteSpeed: 50,
+                      deleteSpeed: 40,
                     }}
                   />
                 </span>
               </div>
             </motion.div>
 
+            {/* Description: Rata Kanan Kiri (text-justify) with clean line height */}
             <motion.p
               variants={itemVariants}
-              className="text-lg text-muted-foreground leading-relaxed max-w-xl"
+              className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl text-justify"
             >
               {heroData.description}
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
+            {/* Action Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-1">
               {heroData.cv && (
-                <Button size="lg" className="bg-white hover:bg-white/90 text-primary font-bold rounded-full px-8 shadow-xl transition-all hover:scale-105 border border-white/20">
-                  <a href={heroData.cv} target="_blank" rel="noreferrer">
-                    Download CV
-                  </a>
-                </Button>
+                <a href={heroData.cv} target="_blank" rel="noreferrer">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full px-7 shadow-lg shadow-primary/20 transition-all hover:scale-105">
+                    {t("hero.downloadCv")}
+                  </Button>
+                </a>
               )}
-              <Button size="lg" variant="outline" className="rounded-full px-8 glass border-primary/50 hover:bg-primary/10 transition-all hover:scale-105">
-                <Link href="https://www.linkedin.com/in/adam-8107ba307/">Let&apos;s Connect LinkedIn</Link>
-              </Button>
+              <a href="https://www.linkedin.com/in/adam-8107ba307/" target="_blank" rel="noreferrer">
+                <Button size="lg" variant="outline" className="rounded-full px-7 glass border-primary/40 hover:bg-primary/10 transition-all hover:scale-105">
+                  {t("hero.connectLinkedin")}
+                </Button>
+              </a>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex items-center gap-6 pt-4">
-              <Link href="https://github.com/adamdev15" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <FaGithub className="h-6 w-6" />
-              </Link>
-              <Link href="https://www.linkedin.com/in/adam-8107ba307/" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <FaLinkedin className="h-6 w-6" />
-              </Link>
-              <Link href="mailto:adam.visionary@gmail.com" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <FaEnvelope className="h-6 w-6" />
-              </Link>
-              <Link href="https://wa.me/6285640600585" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <FaWhatsapp className="h-6 w-6" />
-              </Link>
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className="flex items-center gap-5 pt-2">
+              <a
+                href="https://github.com/adamdev15"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                aria-label="GitHub"
+              >
+                <FaGithub className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/adam-8107ba307/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="mailto:adam.visionary@gmail.com"
+                className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                aria-label="Email"
+              >
+                <FaEnvelope className="h-5 w-5" />
+              </a>
+              <a
+                href="https://wa.me/6285640600585"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp className="h-5 w-5" />
+              </a>
             </motion.div>
           </motion.div>
 
           {/* Right Side: Profile Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px]">
-              {/* Decorative rings */}
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]">
+              {/* Decorative Animated Rings */}
               <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30 animate-spin-slow" />
-              <div className="absolute inset-4 rounded-full border border-accent/20 animate-reverse-spin" />
+              <div className="absolute inset-3 rounded-full border border-accent/25 animate-reverse-spin" />
               
-              {/* Image Container */}
-              <div className="absolute inset-8 rounded-full overflow-hidden glass border border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+              {/* Image Circle Container */}
+              <div className="absolute inset-6 rounded-full overflow-hidden glass border border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                 {heroData.image ? (
-                    <SafeImage 
-                      src={heroData.image} 
-                      alt={heroData.name} 
-                      fill 
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                  <SafeImage 
+                    src={heroData.image} 
+                    alt={heroData.name} 
+                    fill 
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
+                  />
                 ) : (
                   <div className="w-full h-full bg-secondary flex items-center justify-center">
                     <span className="text-muted-foreground">No Image</span>

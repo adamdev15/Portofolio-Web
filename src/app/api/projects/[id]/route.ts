@@ -23,6 +23,8 @@ export async function PUT(
     
     revalidatePath("/");
     revalidatePath("/projects");
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(project);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -46,6 +48,8 @@ export async function DELETE(
     
     revalidatePath("/");
     revalidatePath("/projects");
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

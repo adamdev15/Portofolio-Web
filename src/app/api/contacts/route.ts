@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
@@ -30,6 +31,8 @@ export async function POST(req: Request) {
       data: { name, email, subject: subject || "No Subject", message },
     });
     
+    revalidatePath("/admin/contacts");
+    revalidatePath("/admin/dashboard");
     return NextResponse.json(newMessage);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

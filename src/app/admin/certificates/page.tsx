@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import CertificateClient from "./CertificateClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function CertificatesPage() {
   const certificates = await db.certificate.findMany({
     orderBy: { year: "desc" },
