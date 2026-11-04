@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/context/language-context";
 
@@ -10,7 +9,7 @@ interface FooterProps {
   image?: string | null;
 }
 
-export function Footer({ name = "ADAM", image }: FooterProps) {
+export function Footer({ name = "ADAM" }: FooterProps) {
   const { t } = useLanguage();
 
   return (
@@ -21,11 +20,13 @@ export function Footer({ name = "ADAM", image }: FooterProps) {
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="col-span-1 md:col-span-2 space-y-5">
-            <span className="text-2xl font-bold font-heading tracking-tight">
-              Portofolio<span className="text-primary">.</span>
-            </span>
+            <Link href="/" className="inline-block">
+              <span className="text-2xl font-bold font-heading tracking-tight">
+                Portofolio<span className="text-primary">.</span>
+              </span>
+            </Link>
             <p className="text-muted-foreground max-w-sm leading-relaxed text-sm md:text-base">
-              Information Systems graduate with professional experience in Web Development. Creating high-performance, visually engaging, and scalable digital solutions.
+              {t("footer.desc")}
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -70,11 +71,11 @@ export function Footer({ name = "ADAM", image }: FooterProps) {
           <div>
             <h4 className="font-bold text-base mb-4 text-foreground">{t("footer.quickLinks")}</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#home" className="hover:text-primary transition-colors">{t("nav.home")}</a></li>
-              <li><a href="#experience" className="hover:text-primary transition-colors">{t("nav.experience")}</a></li>
-              <li><a href="#projects" className="hover:text-primary transition-colors">{t("nav.projects")}</a></li>
-              <li><a href="#skills" className="hover:text-primary transition-colors">{t("nav.skills")}</a></li>
-              <li><a href="#certificates" className="hover:text-primary transition-colors">{t("nav.certificates")}</a></li>
+              <li><a href="/#home" className="hover:text-primary transition-colors">{t("nav.home")}</a></li>
+              <li><a href="/#experience" className="hover:text-primary transition-colors">{t("nav.experience")}</a></li>
+              <li><a href="/#projects" className="hover:text-primary transition-colors">{t("nav.projects")}</a></li>
+              <li><a href="/#skills" className="hover:text-primary transition-colors">{t("nav.skills")}</a></li>
+              <li><a href="/#certificates" className="hover:text-primary transition-colors">{t("nav.certificates")}</a></li>
             </ul>
           </div>
 
@@ -92,8 +93,12 @@ export function Footer({ name = "ADAM", image }: FooterProps) {
         <div className="border-t border-border/40 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {name}. {t("footer.rights")}</p>
           <div className="flex gap-6">
-            <span className="hover:text-foreground cursor-pointer transition-colors">{t("footer.privacy")}</span>
-            <span className="hover:text-foreground cursor-pointer transition-colors">{t("footer.terms")}</span>
+            <Link href="/privacy" className="hover:text-foreground hover:underline transition-colors">
+              {t("footer.privacy")}
+            </Link>
+            <Link href="/terms" className="hover:text-foreground hover:underline transition-colors">
+              {t("footer.terms")}
+            </Link>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Calendar } from "lucide-react";
 import { Experience, Education } from "@prisma/client";
 import { useLanguage } from "@/context/language-context";
+import { getTranslatedExperiences, getTranslatedEducation } from "@/lib/data-translations";
 
 interface ExperienceSectionProps {
   experiences: Experience[];
@@ -11,7 +12,9 @@ interface ExperienceSectionProps {
 }
 
 export function ExperienceSection({ experiences, education }: ExperienceSectionProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const currentExperiences = getTranslatedExperiences(experiences, lang);
+  const currentEducation = getTranslatedEducation(education, lang);
 
   return (
     <section id="experience" className="py-20 md:py-24 relative overflow-hidden bg-white/5 px-4 md:px-6 scroll-mt-16">
@@ -44,7 +47,7 @@ export function ExperienceSection({ experiences, education }: ExperienceSectionP
             </div>
 
             <div className="space-y-6 relative pl-6 md:pl-8 border-l border-primary/20">
-              {education.map((edu, index) => (
+              {currentEducation.map((edu, index) => (
                 <motion.div
                   key={edu.id}
                   initial={{ opacity: 0, x: -20 }}
@@ -65,7 +68,7 @@ export function ExperienceSection({ experiences, education }: ExperienceSectionP
                       </div>
                       <div>
                         <h4 className="text-lg md:text-xl font-bold group-hover:text-primary transition-colors">{edu.degree}</h4>
-                        <p className="text-muted-foreground font-medium text-sm">{edu.school}</p>
+                        <p className="text-muted-foreground font-medium text-sm">{edu.school} {edu.field ? `• ${edu.field}` : ""}</p>
                       </div>
                       {edu.description && (
                         <p className="text-sm text-muted-foreground leading-relaxed pt-1">
@@ -76,7 +79,7 @@ export function ExperienceSection({ experiences, education }: ExperienceSectionP
                   </div>
                 </motion.div>
               ))}
-              {education.length === 0 && (
+              {currentEducation.length === 0 && (
                 <p className="text-muted-foreground italic text-sm">{t("exp.noEducation")}</p>
               )}
             </div>
@@ -92,7 +95,7 @@ export function ExperienceSection({ experiences, education }: ExperienceSectionP
             </div>
 
             <div className="space-y-6 relative pl-6 md:pl-8 border-l border-primary/20">
-              {experiences.map((exp, index) => (
+              {currentExperiences.map((exp, index) => (
                 <motion.div
                   key={exp.id}
                   initial={{ opacity: 0, x: -20 }}
@@ -122,7 +125,7 @@ export function ExperienceSection({ experiences, education }: ExperienceSectionP
                   </div>
                 </motion.div>
               ))}
-              {experiences.length === 0 && (
+              {currentExperiences.length === 0 && (
                 <p className="text-muted-foreground italic text-sm">{t("exp.noExperience")}</p>
               )}
             </div>

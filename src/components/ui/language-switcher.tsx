@@ -6,10 +6,9 @@ import { cn } from "@/lib/utils";
 
 interface LanguageSwitcherProps {
   className?: string;
-  variant?: "pill" | "compact";
 }
 
-export function LanguageSwitcher({ className, variant = "pill" }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { lang, setLang } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
@@ -19,13 +18,13 @@ export function LanguageSwitcher({ className, variant = "pill" }: LanguageSwitch
 
   if (!mounted) {
     return (
-      <div className={cn("h-9 w-24 rounded-full bg-secondary/50 animate-pulse", className)} />
+      <div className={cn("h-8 w-20 rounded-full bg-secondary/50 animate-pulse", className)} />
     );
   }
 
-  const languages: { code: Language; label: string; flag: string; fullName: string }[] = [
-    { code: "id", label: "ID", flag: "🇮🇩", fullName: "Bahasa Indonesia" },
-    { code: "en", label: "EN", flag: "🇬🇧", fullName: "English" },
+  const options: { code: Language; label: string; title: string }[] = [
+    { code: "id", label: "ID", title: "Bahasa Indonesia" },
+    { code: "en", label: "EN", title: "English" },
   ];
 
   return (
@@ -33,34 +32,30 @@ export function LanguageSwitcher({ className, variant = "pill" }: LanguageSwitch
       role="group"
       aria-label="Language selection"
       className={cn(
-        "inline-flex items-center p-1 rounded-full bg-secondary/70 border border-border/50 backdrop-blur-md shadow-sm transition-all",
+        "inline-flex items-center p-0.5 rounded-full bg-secondary/80 border border-border/60 shadow-sm",
         className
       )}
     >
-      {languages.map((item) => {
+      {options.map((item) => {
         const isActive = lang === item.code;
         return (
           <button
             key={item.code}
             type="button"
             onClick={() => setLang(item.code)}
-            title={item.fullName}
+            title={item.title}
             aria-pressed={isActive}
             className={cn(
-              "flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-300 select-none",
+              "px-3 py-1 text-xs font-bold rounded-full transition-all duration-200 select-none tracking-wider",
               isActive
-                ? "bg-primary text-primary-foreground shadow-md shadow-primary/25 scale-[1.03]"
-                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                ? "bg-primary text-primary-foreground shadow-sm shadow-primary/30"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/40"
             )}
           >
-            <span className="text-sm leading-none" role="img" aria-label={item.label}>
-              {item.flag}
-            </span>
-            <span>{item.label}</span>
+            {item.label}
           </button>
         );
       })}
     </div>
   );
 }
-

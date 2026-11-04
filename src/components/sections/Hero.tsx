@@ -3,10 +3,10 @@
 import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from "react-icons/fa";
-import Link from "next/link";
 import { SafeImage } from "@/components/ui/safe-image";
 import Typewriter from "typewriter-effect";
 import { useLanguage } from "@/context/language-context";
+import { getTranslatedHero } from "@/lib/data-translations";
 
 interface HeroProps {
   heroData: {
@@ -20,6 +20,7 @@ interface HeroProps {
 
 export function Hero({ heroData }: HeroProps) {
   const { t, lang } = useLanguage();
+  const currentHero = getTranslatedHero(heroData as any, lang) || heroData;
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -68,11 +69,12 @@ export function Hero({ heroData }: HeroProps) {
                 {t("hero.greeting")}
               </h2>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heading tracking-tight text-foreground leading-[1.1]">
-                {heroData.name}
+                {currentHero.name}
               </h1>
               <div className="text-xl md:text-3xl font-semibold text-muted-foreground min-h-[40px] flex items-center">
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-primary">
                   <Typewriter
+                    key={lang}
                     options={{
                       strings: typewriterStrings,
                       autoStart: true,
@@ -84,18 +86,18 @@ export function Hero({ heroData }: HeroProps) {
               </div>
             </motion.div>
 
-            {/* Description: Rata Kanan Kiri (text-justify) with clean line height */}
+            {/* Description: Rata Kanan Kiri (text-justify) with automatic ID/EN translation */}
             <motion.p
               variants={itemVariants}
               className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl text-justify"
             >
-              {heroData.description}
+              {currentHero.description}
             </motion.p>
 
             {/* Action Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-1">
-              {heroData.cv && (
-                <a href={heroData.cv} target="_blank" rel="noreferrer">
+              {currentHero.cv && (
+                <a href={currentHero.cv} target="_blank" rel="noreferrer">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full px-7 shadow-lg shadow-primary/20 transition-all hover:scale-105">
                     {t("hero.downloadCv")}
                   </Button>
@@ -129,7 +131,7 @@ export function Hero({ heroData }: HeroProps) {
                 <FaLinkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:adam.visionary@gmail.com"
+                href="mailto:adam.visionary15@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
                 aria-label="Email"
               >
@@ -161,10 +163,10 @@ export function Hero({ heroData }: HeroProps) {
               
               {/* Image Circle Container */}
               <div className="absolute inset-6 rounded-full overflow-hidden glass border border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-                {heroData.image ? (
+                {currentHero.image ? (
                   <SafeImage 
-                    src={heroData.image} 
-                    alt={heroData.name} 
+                    src={currentHero.image} 
+                    alt={currentHero.name} 
                     fill 
                     className="object-cover"
                     priority

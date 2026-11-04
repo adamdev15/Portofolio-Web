@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useLanguage } from "@/context/language-context";
+import { getTranslatedProjects } from "@/lib/data-translations";
 
 interface ProjectsSectionProps {
   projects: Project[];
@@ -16,8 +17,9 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [visibleCount, setVisibleCount] = useState(6);
-  const { t } = useLanguage();
-  const hasMore = projects.length > visibleCount;
+  const { t, lang } = useLanguage();
+  const currentProjects = getTranslatedProjects(projects, lang);
+  const hasMore = currentProjects.length > visibleCount;
 
   const showMore = () => {
     setVisibleCount(prev => prev + 6);
@@ -55,7 +57,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.slice(0, visibleCount).map((project, index) => (
+          {currentProjects.slice(0, visibleCount).map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
@@ -64,7 +66,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               transition={{ delay: (index % 6) * 0.08 }}
               className="group bg-card rounded-3xl overflow-hidden border border-border/60 hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5 hover:-translate-y-1 flex flex-col"
             >
-              {/* Project Image: Increased Height from h-42 to h-60 md:h-72 for clear and elegant showcase */}
+              {/* Project Image: Increased Height from h-42 to h-60 md:h-72 for clear showcase */}
               <div className="relative h-60 sm:h-64 md:h-72 w-full overflow-hidden bg-secondary/50">
                 {project.image ? (
                   <SafeImage

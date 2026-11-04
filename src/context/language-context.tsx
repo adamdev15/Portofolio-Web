@@ -31,9 +31,14 @@ const translations: Record<Language, Record<string, string>> = {
     "github.badge": "Open Source",
     "github.title": "Kontribusi",
     "github.titleHighlight": "GitHub",
-    "github.subtitle": "Konsistensi dalam coding dan pembelajaran berkelanjutan melalui proyek open source dan mandiri.",
+    "github.subtitle": "Aktivitas coding harian, commit realtime, dan kontribusi proyek open source saya.",
     "github.activeStatus": "Aktif mengembangkan dan berkontribusi setiap hari",
     "github.viewProfile": "Lihat Profil Lengkap",
+    "github.publicRepos": "Repositori Publik",
+    "github.followers": "Pengikut",
+    "github.totalContribs": "Kontribusi Tahun Ini",
+    "github.latestActivity": "Aktivitas Terkini",
+    "github.liveStatus": "Realtime",
 
     // Experience & Education
     "exp.title": "Perjalanan &",
@@ -60,13 +65,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Skills
     "skills.title": "Keahlian",
     "skills.titleHighlight": "Teknis",
-    "skills.subtitle": "Teknologi dan *tools* yang saya kuasai untuk merealisasikan ide menjadi solusi digital nyata.",
+    "skills.subtitle": "Teknologi dan tools yang saya kuasai untuk merealisasikan ide menjadi solusi digital nyata.",
 
     // Certificates
     "cert.title": "Sertifikat",
     "cert.titleHighlight": "& Penghargaan",
     "cert.subtitle": "Bukti pembelajaran berkelanjutan dan verifikasi keahlian profesional saya.",
-    "cert.issuedIn": "Diterbitkan tahun",
+    "cert.issuedIn": "Terbit",
     "cert.verify": "Verifikasi",
     "cert.viewMore": "Lihat Semua Sertifikat",
     "cert.allTitle": "Semua",
@@ -82,7 +87,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.email": "Email",
     "contact.phone": "Telepon / WhatsApp",
     "contact.location": "Lokasi",
-    "contact.locationValue": "Indonesia",
+    "contact.locationValue": "Kab. Tegal, Jawa Tengah, Indonesia",
     "contact.followMe": "Ikuti Saya",
     "contact.nameLabel": "Nama Lengkap",
     "contact.namePlaceholder": "Nama Anda",
@@ -98,11 +103,22 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.error": "Gagal mengirim pesan. Silakan coba lagi.",
 
     // Footer
+    "footer.desc": "Lulusan Sarjana Sistem Informasi dari Universitas Harkat Negeri dengan pengalaman profesional dalam Web Development. Menggabungkan kemampuan desain UI/UX dan arsitektur backend untuk menciptakan solusi digital yang fungsional, terukur, dan berdampak.",
     "footer.quickLinks": "Tautan Cepat",
     "footer.services": "Layanan",
     "footer.rights": "Hak Cipta Dilindungi.",
     "footer.privacy": "Kebijakan Privasi",
     "footer.terms": "Ketentuan Layanan",
+
+    // Legal Pages
+    "legal.backHome": "Kembali ke Beranda",
+    "legal.lastUpdated": "Terakhir diperbarui",
+    "privacy.title": "Kebijakan",
+    "privacy.titleHighlight": "Privasi",
+    "privacy.subtitle": "Komitmen transparansi dalam pengelolaan dan perlindungan data pengunjung situs portofolio ini.",
+    "terms.title": "Ketentuan",
+    "terms.titleHighlight": "Layanan",
+    "terms.subtitle": "Syarat dan ketentuan penggunaan situs web portofolio, konten, dan karya proyek saya.",
   },
   en: {
     // Nav
@@ -124,14 +140,19 @@ const translations: Record<Language, Record<string, string>> = {
     "github.badge": "Open Source",
     "github.title": "GitHub",
     "github.titleHighlight": "Contributions",
-    "github.subtitle": "Consistency in coding and continuous learning through open-source and personal projects.",
+    "github.subtitle": "Daily coding activities, realtime commit telemetry, and open source projects.",
     "github.activeStatus": "Actively developing and contributing daily",
     "github.viewProfile": "View Full Profile",
+    "github.publicRepos": "Public Repos",
+    "github.followers": "Followers",
+    "github.totalContribs": "Year Contributions",
+    "github.latestActivity": "Latest Activity",
+    "github.liveStatus": "Realtime Live",
 
     // Experience & Education
     "exp.title": "Journey &",
     "exp.titleHighlight": "Experience",
-    "exp.subtitle": "A timeline of my professional growth and educational background.",
+    "exp.subtitle": "A timeline of my professional growth and academic background.",
     "exp.education": "Education",
     "exp.experience": "Experience",
     "exp.present": "Present",
@@ -159,7 +180,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cert.title": "Certificates",
     "cert.titleHighlight": "& Awards",
     "cert.subtitle": "Recognition of my professional continuous learning and skills verification.",
-    "cert.issuedIn": "Issued in",
+    "cert.issuedIn": "Issued",
     "cert.verify": "Verify",
     "cert.viewMore": "View More Certificates",
     "cert.allTitle": "All",
@@ -175,7 +196,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.email": "Email",
     "contact.phone": "Phone / WhatsApp",
     "contact.location": "Location",
-    "contact.locationValue": "Indonesia",
+    "contact.locationValue": "Tegal Regency, Central Java, Indonesia",
     "contact.followMe": "Follow Me",
     "contact.nameLabel": "Full Name",
     "contact.namePlaceholder": "John Doe",
@@ -191,11 +212,22 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.error": "Failed to send message. Please try again.",
 
     // Footer
+    "footer.desc": "Bachelor of Information Systems graduate from Harkat State University with professional experience in Web Development. Combining UI/UX design and scalable backend engineering to build functional and impactful digital solutions.",
     "footer.quickLinks": "Quick Links",
     "footer.services": "Services",
     "footer.rights": "All Rights Reserved.",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Service",
+
+    // Legal Pages
+    "legal.backHome": "Back to Home",
+    "legal.lastUpdated": "Last updated",
+    "privacy.title": "Privacy",
+    "privacy.titleHighlight": "Policy",
+    "privacy.subtitle": "Transparency and commitment to protecting your personal information on this portfolio.",
+    "terms.title": "Terms of",
+    "terms.titleHighlight": "Service",
+    "terms.subtitle": "Terms and conditions governing the access, use of this portfolio, and showcased works.",
   },
 };
 
@@ -242,4 +274,3 @@ export function useLanguage() {
   }
   return context;
 }
-
